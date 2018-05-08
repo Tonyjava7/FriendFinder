@@ -2,5 +2,4 @@ FriendFinder
 
 * Purpose: created to linked people together who have similar preferences and personalities.
 
-* Heroku link: https://git.heroku.com/sleepy-brushlands-67481.git
-
+* Heroku link: http://sleepy-brushlands-67481.herokuapp.com/
