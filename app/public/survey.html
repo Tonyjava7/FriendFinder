@@ -123,33 +123,31 @@
                     <option value="5">5 (Strongly Agree)</option>
                 </select>
                 <br>
-                <!-- Materialize Modal Trigger/Submit Button -->
-                <button type ="submit" data-target="modal1" class="waves-effect waves-light btn modal-trigger cyan lighten-1" id="submitBtn">Submit</button>
+                
+                <button type ="submit" data-target="modal1" class="waves-effect waves-light btn modal-trigger " id="submitBtn">Submit</button>
             </div>
         </div>
         <div class='col s4'>
-            <p><a href='/api/friends'>API Friends List</a> | <a href='https://github.com/StefanieDing/friend-finder' target='_blank'>GitHub Repo</a></p>
+            <p><a href='/api/friends'>API Friends List</a> | <a href='https://github.com/Tonyjava7/FriendFinder' target='_blank'>GitHub Repo</a></p>
         </div>
 
-        <!-- Materialize Modal Structure -->
         <div id="modal1" class="modal">
           <div class="modal-content">
-            <h4>Meet Your New BFF</h4>
+            <h4>Meet the person who is just like you.</h4>
             <h5 id="matchName"></h5>
             <img id="matchPic" src="" alt="No Image" width = 250px>
           </div>
         <div class="modal-footer">
-          <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Done</a>
+          <a href="#!" class=" modal-action modal-close waves-effect btn-flat">Done</a>
         </div>
       </div>
 
     </div>
 
-<!-- Grabs information and sends it to server -->
 <script type="text/javascript">
 $(document).ready(function() {
     $("#submitBtn").on("click", function() {
-        //form validation
+        
         function validateForm() {
             var isValid = true;
             $('.validate').each(function() {
@@ -167,57 +165,31 @@ $(document).ready(function() {
             return isValid;
         }
 
-        //if everything is filled
         if (validateForm() == true) {
-            //creates a new friend from the values submitted
             var newFriend = {
                 name: $('#name').val().trim(),
                 profilePic: $('#photo').val().trim(),
                 scores: [
-                    $('#q1').val(),
-                    $('#q2').val(),
-                    $('#q3').val(),
-                    $('#q4').val(),
-                    $('#q5').val(),
-                    $('#q6').val(),
-                    $('#q7').val(),
-                    $('#q8').val(),
-                    $('#q9').val(),
-                    $('#q10').val(),
+                    $('#q1, #q2, #q3, #q4, #q5, #q6, #q7, #q8, #q9, #q10').val()
                 ]
             };
-
-            //Grabs current URL of website
             var currentURL = window.location.origin;
 
-            //AJAX posts the data to friends API.
             $.post(currentURL + "/api/friends", newFriend, function(data) {
-                //Grab the result from the AJAX post so that the best match's name and photo are displayed.
-                $("#matchName").text(data.name);
+                 $("#matchName").text(data.name);
                 $("#matchPic").attr("src", data.profilePic);
 
             });
-            // Show the modal with the best match
+
                 $('.modal').modal();
 
-            //clear form after submission
-            $('#name').val("");
-            $('#photo').val("");
-            $('#q1').val("");
-            $('#q2').val("");
-            $('#q3').val("");
-            $('#q4').val("");
-            $('#q5').val("");
-            $('#q6').val("");
-            $('#q7').val("");
-            $('#q8').val("");
-            $('#q9').val("");
-            $('#q10').val("");
+
+            $('#name, #photo, #q1, #q2, #q3, #q4, #q5, #q6, #q7, #q8, #q9, #q10').val("");
+            
         } else {
-            alert("Please fill out ALL fields before submitting survey!")
+            alert("Please fill out ALL fields!")
         }
 
-        // return false;
     });
 });
 </script>
